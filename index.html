@@ -252,273 +252,302 @@
       </div>
     </div>
   </section>
-<!-- Certificates Section -->
+<!-- Add this updated certificate section to replace your current one -->
 <section id="certificates" class="certificates-section py-5">
   <div class="container">
     <h2 class="mb-4"><i class="fas fa-certificate"></i> Certificates</h2>
-    <div class="text-center mb-4">
-      <button class="cert-btn active" data-target="technical">Technical</button>
-      <button class="cert-btn" data-target="events">Events & Workshops</button>
-      <button class="cert-btn" data-target="achievements">Achievements</button>
+    
+    <!-- Enhanced tab navigation -->
+    <div class="cert-tabs-container mb-5">
+      <div class="cert-tabs">
+        <button class="cert-tab active" data-target="technical">
+          <i class="fas fa-laptop-code"></i>
+          <span>Technical</span>
+        </button>
+        <button class="cert-tab" data-target="events">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Events & Workshops</span>
+        </button>
+        <button class="cert-tab" data-target="achievements">
+          <i class="fas fa-trophy"></i>
+          <span>Achievements</span>
+        </button>
+      </div>
     </div>
 
     <!-- Technical Certificates -->
     <div id="technical" class="cert-content show">
-      <div class="row">
+      <div class="cert-grid">
+        <!-- IBM Data Science & AI - Multiple Images (3) -->
+        <div class="cert-card">
+          <div class="cert-card-inner">
+            <div class="certificate-carousel">
+              <div class="certificate-slide active">
+                <img src="assets/images/certificates/ibm-ai-1.jpg" alt="IBM AI Certificate Part 1" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/ibm-ai-2.jpg" alt="IBM AI Certificate Part 2" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/ibm-ai-3.jpg" alt="IBM AI Certificate Part 3" class="certificate-img">
+              </div>
+              <div class="carousel-controls">
+                <button class="carousel-btn prev" onclick="changeCertificateImage(this, -1)">‹</button>
+                <span class="carousel-indicator">1/3</span>
+                <button class="carousel-btn next" onclick="changeCertificateImage(this, 1)">›</button>
+              </div>
+            </div>
+            <div class="cert-card-content">
+              <div class="cert-badge ibm">IBM</div>
+              <h5 class="cert-title">IBM Data Science & AI</h5>
+              <p class="cert-description">Artificial Intelligence, LLM Basics and Art of Prompting by IBM SkillsBuild</p>
+              <div class="cert-meta">
+                <span class="cert-count">3 certificates</span>
+              </div>
+            </div>
+          </div>
+        </div>
         
-       <!-- IBM Data Science & AI - Multiple Images (3) -->
-<div class="col-md-4 mb-4">
-  <div class="card shadow text-center h-100">
-    <div class="certificate-carousel">
-      <div class="certificate-slide active">
-        <img src="assets/images/certificates/ibm-ai-1.jpg" alt="IBM AI Certificate Part 1" class="certificate-img">
-      </div>
-      <div class="certificate-slide">
-        <img src="assets/images/certificates/ibm-ai-2.jpg" alt="IBM AI Certificate Part 2" class="certificate-img">
-      </div>
-      <div class="certificate-slide">
-        <img src="assets/images/certificates/ibm-ai-3.jpg" alt="IBM AI Certificate Part 3" class="certificate-img">
-      </div>
-      <div class="carousel-controls">
-        <button class="carousel-btn prev" onclick="changeCertificateImage(this, -1)">‹</button>
-        <span class="carousel-indicator">1/3</span>
-        <button class="carousel-btn next" onclick="changeCertificateImage(this, 1)">›</button>
-      </div>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">IBM Data Science & AI</h5>
-      <p class="card-text">Artificial Intelligence, LLM Basics and Art of Prompting by IBM SkillsBuild</p>
-      <span class="badge bg-aqua">IBM</span>
-      <small class="text-muted d-block mt-2">3 certificates</small>
-    </div>
-  </div>
-</div>
         <!-- IBM Front End Technologies -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
-            <img src="assets\images\certificates\ibm-frontend.jpg" alt="IBM Front End Technologies Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">Front End Technologies</h5>
-              <p class="card-text">Front End Technologies certification by IBM</p>
-              <span class="badge bg-aqua">IBM</span>
+        <div class="cert-card">
+          <div class="cert-card-inner">
+            <img src="assets/images/certificates/ibm-frontend.jpg" alt="IBM Front End Technologies Certificate" class="certificate-img">
+            <div class="cert-card-content">
+              <div class="cert-badge ibm">IBM</div>
+              <h5 class="cert-title">Front End Technologies</h5>
+              <p class="cert-description">Front End Technologies certification by IBM</p>
             </div>
           </div>
         </div>
+        
         <!-- NPTEL Privacy & Security -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/nptel-privacy-security.jpg" alt="NPTEL Privacy & Security Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">Privacy & Security in Social Media</h5>
-              <p class="card-text">NPTEL certification with 72% score</p>
-              <span class="badge bg-success">NPTEL</span>
+            <div class="cert-card-content">
+              <div class="cert-badge nptel">NPTEL</div>
+              <h5 class="cert-title">Privacy & Security in Social Media</h5>
+              <p class="cert-description">NPTEL certification with 72% score</p>
             </div>
           </div>
         </div>
+        
         <!-- Java Programming -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/java-great-learning.jpg" alt="Java Programming Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">Java Programming</h5>
-              <p class="card-text">Java Programming certification by Great Learning</p>
-              <span class="badge bg-warning text-dark">Great Learning</span>
+            <div class="cert-card-content">
+              <div class="cert-badge great-learning">Great Learning</div>
+              <h5 class="cert-title">Java Programming</h5>
+              <p class="cert-description">Java Programming certification by Great Learning</p>
             </div>
           </div>
         </div>
+        
         <!-- Data Cleaning -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/data-cleaning-coursera.jpg" alt="Data Cleaning Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">Data Cleaning</h5>
-              <p class="card-text">Data Cleaning certification by Coursera</p>
-              <span class="badge bg-primary">Coursera</span>
+            <div class="cert-card-content">
+              <div class="cert-badge coursera">Coursera</div>
+              <h5 class="cert-title">Data Cleaning</h5>
+              <p class="cert-description">Data Cleaning certification by Coursera</p>
             </div>
           </div>
         </div>
+        
         <!-- IR4.0 Technologies -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/ir4-techsaksham.jpg" alt="IR4.0 Technologies Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">IR4.0 Technologies</h5>
-              <p class="card-text">Foundation course on IR4.0 Technologies by TechSaksham (Microsoft & SAP)</p>
-              <span class="badge bg-info">TechSaksham</span>
+            <div class="cert-card-content">
+              <div class="cert-badge techsaksham">TechSaksham</div>
+              <h5 class="cert-title">IR4.0 Technologies</h5>
+              <p class="cert-description">Foundation course on IR4.0 Technologies by TechSaksham (Microsoft & SAP)</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
     <!-- Events & Workshops -->
     <div id="events" class="cert-content">
-      <div class="row">
+      <div class="cert-grid">
         <!-- Quantum Computing Workshop -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/quantum-computing.jpg" alt="Quantum Computing Workshop Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">Quantum Computing Workshop</h5>
-              <p class="card-text">Workshop at Thiagarajar College of Engineering, Madurai</p>
-              <span class="badge bg-purple">Workshop</span>
+            <div class="cert-card-content">
+              <div class="cert-badge workshop">Workshop</div>
+              <h5 class="cert-title">Quantum Computing Workshop</h5>
+              <p class="cert-description">Workshop at Thiagarajar College of Engineering, Madurai</p>
             </div>
           </div>
         </div>
-
+        
         <!-- All India Women Hackathon -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/women-hackathon.jpg" alt="All India Women Hackathon Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">All India Women Hackathon</h5>
-              <p class="card-text">Organized by Shooting Stars Foundation</p>
-              <span class="badge bg-purple">Hackathon</span>
+            <div class="cert-card-content">
+              <div class="cert-badge hackathon">Hackathon</div>
+              <h5 class="cert-title">All India Women Hackathon</h5>
+              <p class="cert-description">Organized by Shooting Stars Foundation</p>
             </div>
           </div>
         </div>
-
+        
         <!-- E-Graphie 5.0 Symposium -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/e-graphie.jpg" alt="E-Graphie 5.0 Symposium Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">E-Graphie 5.0 Symposium</h5>
-              <p class="card-text">National Level Technical Contest at Jansons Institute of Technology</p>
-              <span class="badge bg-info">Symposium</span>
+            <div class="cert-card-content">
+              <div class="cert-badge symposium">Symposium</div>
+              <h5 class="cert-title">E-Graphie 5.0 Symposium</h5>
+              <p class="cert-description">National Level Technical Contest at Jansons Institute of Technology</p>
             </div>
           </div>
         </div>
-
+        
         <!-- INTEROFEST-2K25 Symposium -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/interofest.jpg" alt="INTEROFEST-2K25 Symposium Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">INTEROFEST-2K25 Symposium</h5>
-              <p class="card-text">National Level Symposium at Sree Sakthi Engineering College</p>
-              <span class="badge bg-info">Symposium</span>
+            <div class="cert-card-content">
+              <div class="cert-badge symposium">Symposium</div>
+              <h5 class="cert-title">INTEROFEST-2K25 Symposium</h5>
+              <p class="cert-description">National Level Symposium at Sree Sakthi Engineering College</p>
             </div>
           </div>
         </div>
+        
         <!-- Industrial Visit - iROID Technologies -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/industrial-visit.jpg" alt="iROID Technologies Industrial Visit Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">Industrial Visit</h5>
-              <p class="card-text">iROID Technologies, Cochin</p>
-              <span class="badge bg-secondary">Industrial</span>
+            <div class="cert-card-content">
+              <div class="cert-badge industrial">Industrial</div>
+              <h5 class="cert-title">Industrial Visit</h5>
+              <p class="cert-description">iROID Technologies, Cochin</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
     <!-- Achievements -->
     <div id="achievements" class="cert-content">
-      <div class="row">
+      <div class="cert-grid">
         <!-- Project Expo -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/project-expo-2nd.jpg" alt="Project Expo 2nd Prize Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">Project Expo 24 - 2nd Prize</h5>
-              <p class="card-text">Won second prize at PROJECT EXPO 24, Chettinad College of Engineering</p>
-              <span class="badge bg-gold">Winner</span>
+            <div class="cert-card-content">
+              <div class="cert-badge winner">Winner</div>
+              <h5 class="cert-title">Project Expo 24 - 2nd Prize</h5>
+              <p class="cert-description">Won second prize at PROJECT EXPO 24, Chettinad College of Engineering</p>
             </div>
           </div>
         </div>
+        
         <!-- Athletics - Triple Jump -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
+        <div class="cert-card">
+          <div class="cert-card-inner">
             <img src="assets/images/certificates/athletics-triple-jump.jpg" alt="District Level Athletics Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">District Level Athletics</h5>
-              <p class="card-text">First prize in Triple Jump at District Level Athletic Competition</p>
-              <span class="badge bg-gold">Sports</span>
+            <div class="cert-card-content">
+              <div class="cert-badge sports">Sports</div>
+              <h5 class="cert-title">District Level Athletics</h5>
+              <p class="cert-description">First prize in Triple Jump at District Level Athletic Competition</p>
             </div>
           </div>
         </div>
         
         <!-- Athletics - Relay - Multiple Images (3) -->
-        <div class="col-md-4 mb-4">
-         <div class="card shadow text-center h-100">
-          <div class="certificate-carousel">
-           <div class="certificate-slide active">
-            <img src="assets/images/certificates/relay-1.jpg" alt="Relay Certificate Part 1" class="certificate-img">
-           </div>
-           <div class="certificate-slide">
-            <img src="assets/images/certificates/relay-2.jpg" alt="Relay Certificate Part 2" class="certificate-img">
-           </div>
-           <div class="certificate-slide">
-            <img src="assets/images/certificates/relay-3.jpg" alt="Relay Certificate Part 3" class="certificate-img">
-           </div>
-           <div class="carousel-controls">
-            <button class="carousel-btn prev" onclick="changeCertificateImage(this, -1)">‹</button>
-            <span class="carousel-indicator">1/3</span>
-            <button class="carousel-btn next" onclick="changeCertificateImage(this, 1)">›</button>
-           </div>
-         </div>
-         <div class="card-body">
-          <h5 class="card-title">Zonal Level Athletics</h5>
-          <p class="card-text">Second prize in Relay Thrice at Zonal Level Athletic Competition</p>
-          <span class="badge bg-silver">Sports</span>
-          <small class="text-muted d-block mt-2">3 certificates</small>
-         </div>
-       </div>
-      </div>
-         <!-- Athletics - Long Jump -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow text-center h-100">
-            <img src="assets/images/certificates/long-jump.jpg" alt="Long Jump Certificate" class="certificate-img">
-            <div class="card-body">
-              <h5 class="card-title">Zonal Level Athletics</h5>
-              <p class="card-text">Third prize in Long Jump at Zonal Level Athletic Competition</p>
-              <span class="badge bg-bronze">Sports</span>
+        <div class="cert-card">
+          <div class="cert-card-inner">
+            <div class="certificate-carousel">
+              <div class="certificate-slide active">
+                <img src="assets/images/certificates/relay-1.jpg" alt="Relay Certificate Part 1" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/relay-2.jpg" alt="Relay Certificate Part 2" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/relay-3.jpg" alt="Relay Certificate Part 3" class="certificate-img">
+              </div>
+              <div class="carousel-controls">
+                <button class="carousel-btn prev" onclick="changeCertificateImage(this, -1)">‹</button>
+                <span class="carousel-indicator">1/3</span>
+                <button class="carousel-btn next" onclick="changeCertificateImage(this, 1)">›</button>
+              </div>
+            </div>
+            <div class="cert-card-content">
+              <div class="cert-badge sports">Sports</div>
+              <h5 class="cert-title">Zonal Level Athletics</h5>
+              <p class="cert-description">Second prize in Relay Thrice at Zonal Level Athletic Competition</p>
+              <div class="cert-meta">
+                <span class="cert-count">3 certificates</span>
+              </div>
             </div>
           </div>
         </div>
+        
+        <!-- Athletics - Long Jump -->
+        <div class="cert-card">
+          <div class="cert-card-inner">
+            <img src="assets/images/certificates/long-jump.jpg" alt="Long Jump Certificate" class="certificate-img">
+            <div class="cert-card-content">
+              <div class="cert-badge sports">Sports</div>
+              <h5 class="cert-title">Zonal Level Athletics</h5>
+              <p class="cert-description">Third prize in Long Jump at Zonal Level Athletic Competition</p>
+            </div>
+          </div>
+        </div>
+        
         <!-- Intra College & School Sports - Multiple Images (8) -->
-        <div class="col-md-4 mb-4">
-         <div class="card shadow text-center h-100">
-          <div class="certificate-carousel">
-           <div class="certificate-slide active">
-            <img src="assets/images/certificates/sports-1.jpg" alt="Sports Event 1" class="certificate-img">
-           </div>
-           <div class="certificate-slide">
-            <img src="assets/images/certificates/sports-2.jpg" alt="Sports Event 2" class="certificate-img">
-           </div>
-          <div class="certificate-slide">
-           <img src="assets/images/certificates/sports-3.jpg" alt="Sports Event 3" class="certificate-img">
-          </div>
-          <div class="certificate-slide">
-           <img src="assets/images/certificates/sports-4.jpg" alt="Sports Event 4" class="certificate-img">
-          </div>
-          <div class="certificate-slide">
-           <img src="assets/images/certificates/sports-5.jpg" alt="Sports Event 5" class="certificate-img">
-          </div>
-          <div class="certificate-slide">
-           <img src="assets/images/certificates/sports-6.jpg" alt="Sports Event 6" class="certificate-img">
-          </div>
-          <div class="certificate-slide">
-           <img src="assets/images/certificates/sports-7.jpg" alt="Sports Event 7" class="certificate-img">
-          </div>
-          <div class="certificate-slide">
-           <img src="assets/images/certificates/sports-8.jpg" alt="Sports Event 8" class="certificate-img">
-          </div>
-          <div class="carousel-controls">
-           <button class="carousel-btn prev" onclick="changeCertificateImage(this, -1)">‹</button>
-           <span class="carousel-indicator">1/8</span>
-           <button class="carousel-btn next" onclick="changeCertificateImage(this, 1)">›</button>
+        <div class="cert-card">
+          <div class="cert-card-inner">
+            <div class="certificate-carousel">
+              <div class="certificate-slide active">
+                <img src="assets/images/certificates/sports-1.jpg" alt="Sports Event 1" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/sports-2.jpg" alt="Sports Event 2" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/sports-3.jpg" alt="Sports Event 3" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/sports-4.jpg" alt="Sports Event 4" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/sports-5.jpg" alt="Sports Event 5" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/sports-6.jpg" alt="Sports Event 6" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/sports-7.jpg" alt="Sports Event 7" class="certificate-img">
+              </div>
+              <div class="certificate-slide">
+                <img src="assets/images/certificates/sports-8.jpg" alt="Sports Event 8" class="certificate-img">
+              </div>
+              <div class="carousel-controls">
+                <button class="carousel-btn prev" onclick="changeCertificateImage(this, -1)">‹</button>
+                <span class="carousel-indicator">1/8</span>
+                <button class="carousel-btn next" onclick="changeCertificateImage(this, 1)">›</button>
+              </div>
+            </div>
+            <div class="cert-card-content">
+              <div class="cert-badge sports">Sports</div>
+              <h5 class="cert-title">Intra College & School Sports</h5>
+              <p class="cert-description">Won prizes in Intra College and Intra School Sports Events</p>
+              <div class="cert-meta">
+                <span class="cert-count">8 certificates</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="card-body">
-         <h5 class="card-title">Intra College & School Sports</h5>
-         <p class="card-text">Won prizes in Intra College and Intra School Sports Events</p>
-         <span class="badge bg-gold">Sports</span>
-         <small class="text-muted d-block mt-2">8 certificates</small>
-        </div>
-        </div>
-       </div>
       </div>
     </div>
   </div>
