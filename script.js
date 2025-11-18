@@ -86,10 +86,9 @@ function initializeScrollAnimations() {
 
   animatedElements.forEach(el => observer.observe(el));
 }
-
-// Certificates Tabs
+// Enhanced Certificate Section Functionality
 function initializeCertificateTabs() {
-  const buttons = document.querySelectorAll('.cert-btn');
+  const buttons = document.querySelectorAll('.cert-tab');
   const contents = document.querySelectorAll('.cert-content');
 
   // Show first section by default
@@ -104,30 +103,30 @@ function initializeCertificateTabs() {
       const target = document.getElementById(targetId);
 
       // Remove active class from all buttons and hide all contents
-      buttons.forEach(b => b.classList.remove('active'));
+      buttons.forEach(b => {
+        b.classList.remove('active');
+        b.style.transform = 'translateY(0)';
+      });
       contents.forEach(c => c.classList.remove('show'));
 
       // Add active class to clicked button and show target content
       btn.classList.add('active');
+      btn.style.transform = 'translateY(-2px)';
       target.classList.add('show');
-      
-      // Smooth scroll to certificates section when changing tabs
-      document.getElementById('certificates').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
     });
   });
 }
 
-// Certificate Carousel Functionality - FIXED
+// Enhanced Certificate Carousel Functionality - FIXED SCOPE ISSUE
 function changeCertificateImage(button, direction) {
-  const card = button.closest('.card');
+  const card = button.closest('.cert-card');
   const carousel = card.querySelector('.certificate-carousel');
   const slides = carousel.querySelectorAll('.certificate-slide');
   const indicator = card.querySelector('.carousel-indicator');
   
   let currentIndex = 0;
+  
+  // Find current active slide - ONLY IN THIS SPECIFIC CAROUSEL
   slides.forEach((slide, index) => {
     if (slide.classList.contains('active')) {
       currentIndex = index;
@@ -135,13 +134,333 @@ function changeCertificateImage(button, direction) {
     }
   });
   
+  // Calculate new index with wrap-around
   let newIndex = (currentIndex + direction + slides.length) % slides.length;
+  
+  // Show new slide - ONLY IN THIS SPECIFIC CAROUSEL
   slides[newIndex].classList.add('active');
   indicator.textContent = `${newIndex + 1}/${slides.length}`;
 }
 
-// Make function global for onclick attributes
+// Initialize individual carousels properly
+function initializeCarousels() {
+  const carousels = document.querySelectorAll('.certificate-carousel');
+  
+  carousels.forEach((carousel, index) => {
+    const slides = carousel.querySelectorAll('.certificate-slide');
+    const indicator = carousel.querySelector('.carousel-indicator');
+    
+    // Initialize first slide as active for each carousel
+    if (slides.length > 0) {
+      slides[0].classList.add('active');
+      if (indicator) {
+        indicator.textContent = `1/${slides.length}`;
+      }
+    }
+    
+    // Add unique event listeners for each carousel's buttons
+    const prevBtn = carousel.querySelector('.carousel-btn.prev');
+    const nextBtn = carousel.querySelector('.carousel-btn.next');
+    
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent event bubbling
+        changeCertificateImage(this, -1);
+      });
+    }
+    
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent event bubbling
+        changeCertificateImage(this, 1);
+      });
+    }
+    
+    // Add touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+    
+    carousel.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+    });
+    
+    carousel.addEventListener('touchend', function(e) {
+      endX = e.changedTouches[0].clientX;
+      handleSwipe(this);
+    });
+    
+    function handleSwipe(carouselElement) {
+      const swipeThreshold = 50;
+      const difference = startX - endX;
+      
+      if (Math.abs(difference) > swipeThreshold) {
+        if (difference > 0) {
+          // Swipe left - next
+          const nextBtn = carouselElement.querySelector('.carousel-btn.next');
+          if (nextBtn) changeCertificateImage(nextBtn, 1);
+        } else {
+          // Swipe right - previous
+          const prevBtn = carouselElement.querySelector('.carousel-btn.prev');
+          if (prevBtn) changeCertificateImage(prevBtn, -1);
+        }
+      }
+    }
+  });
+}
+
+// Auto-rotate carousel for certificates with multiple images
+function initializeAutoCarousel() {
+  const carousels = document.querySelectorAll('.certificate-carousel');
+  
+  carousels.forEach(carousel => {
+    const slides = carousel.querySelectorAll('.certificate-slide');
+    if (slides.length > 1) {
+      let autoRotateInterval;
+      
+      const startAutoRotate = () => {
+        autoRotateInterval = setInterval(() => {
+          const nextBtn = carousel.querySelector('.carousel-btn.next');
+          if (nextBtn) {
+            changeCertificateImage(nextBtn, 1);
+          }
+        }, 5000); // Rotate every 5 seconds
+      };
+      
+      const stopAutoRotate = () => {
+        if (autoRotateInterval) {
+          clearInterval(autoRotateInterval);
+        }
+      };
+      
+      // Start auto-rotate when card is visible
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startAutoRotate();
+          } else {
+            stopAutoRotate();
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(carousel.closest('.cert-card'));
+      
+      // Pause auto-rotate on hover
+      const card = carousel.closest('.cert-card');
+      card.addEventListener('mouseenter', stopAutoRotate);
+      card.addEventListener('mouseleave', startAutoRotate);
+      
+      // Pause auto-rotate on touch
+      card.addEventListener('touchstart', stopAutoRotate);
+      card.addEventListener('touchend', () => {
+        setTimeout(startAutoRotate, 3000); // Resume after 3 seconds
+      });
+    }
+  });
+}
+
+// Certificate modal view for larger images
+function initializeCertificateModal() {
+  const certificateImages = document.querySelectorAll('.certificate-img');
+  
+  certificateImages.forEach(img => {
+    img.style.cursor = 'zoom-in';
+    
+    img.addEventListener('click', function() {
+      // Get the current active slide if it's in a carousel
+      const carousel = this.closest('.certificate-carousel');
+      let imageSrc = this.src;
+      let imageAlt = this.alt;
+      
+      if (carousel) {
+        const activeSlide = carousel.querySelector('.certificate-slide.active');
+        if (activeSlide) {
+          const activeImg = activeSlide.querySelector('.certificate-img');
+          if (activeImg) {
+            imageSrc = activeImg.src;
+            imageAlt = activeImg.alt;
+          }
+        }
+      }
+      
+      const modal = document.createElement('div');
+      modal.className = 'certificate-modal';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <img src="${imageSrc}" alt="${imageAlt}" class="modal-certificate-img">
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // Close modal functionality
+      const closeModal = () => {
+        document.body.removeChild(modal);
+        document.body.style.overflow = 'auto';
+      };
+      
+      modal.querySelector('.close-modal').addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      
+      // Close on escape key
+      document.addEventListener('keydown', function closeOnEscape(e) {
+        if (e.key === 'Escape') {
+          closeModal();
+          document.removeEventListener('keydown', closeOnEscape);
+        }
+      });
+      
+      document.body.style.overflow = 'hidden';
+    });
+  });
+}
+
+// Add CSS for modal and carousel transitions
+function injectModalStyles() {
+  const modalStyles = `
+    .certificate-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .certificate-modal .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    .modal-certificate-img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      z-index: 10000;
+    }
+    
+    .close-modal:hover {
+      color: var(--primary);
+    }
+    
+    /* Smooth carousel transitions */
+    .certificate-slide {
+      transition: opacity 0.4s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Mobile touch improvements */
+    .certificate-carousel {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  `;
+  
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = modalStyles;
+  document.head.appendChild(styleSheet);
+}
+
+// Reset all carousels to first slide
+function resetAllCarousels() {
+  const carousels = document.querySelectorAll('.certificate-carousel');
+  
+  carousels.forEach(carousel => {
+    const slides = carousel.querySelectorAll('.certificate-slide');
+    const indicator = carousel.querySelector('.carousel-indicator');
+    
+    // Remove active from all slides
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    // Activate first slide
+    if (slides.length > 0) {
+      slides[0].classList.add('active');
+      if (indicator) {
+        indicator.textContent = `1/${slides.length}`;
+      }
+    }
+  });
+}
+
+// Initialize all certificate functionality
+function initializeCertificateSection() {
+  initializeCertificateTabs();
+  initializeCarousels(); // Use the new fixed function
+  initializeAutoCarousel();
+  injectModalStyles();
+  initializeCertificateModal();
+  
+  // Reset carousels when switching tabs
+  const tabButtons = document.querySelectorAll('.cert-tab');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', resetAllCarousels);
+  });
+  
+  // Add scroll animations for certificate cards
+  const certCards = document.querySelectorAll('.cert-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  certCards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(card);
+  });
+}
+
+// Make functions globally available
 window.changeCertificateImage = changeCertificateImage;
+window.resetAllCarousels = resetAllCarousels;
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initializeCertificateSection();
+});
+
+// Re-initialize carousels when the page becomes visible again
+document.addEventListener('visibilitychange', function() {
+  if (!document.hidden) {
+    setTimeout(initializeCarousels, 100);
+  }
+});
+
 
 // Contact Form Handler
 function initializeContactForm() {
