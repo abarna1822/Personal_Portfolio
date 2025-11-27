@@ -539,3 +539,34 @@ console.log(`
 
 // Make carousel function global for onclick attributes
 window.changeCertificateImage = changeCertificateImage;
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    const toastMsg = document.getElementById("toast-message");
+    toastMsg.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3000);
+  }
+
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    });
+
+    if (res.ok) {
+      showToast("Message sent successfully 🚀");
+      form.reset();
+    } else {
+      showToast("Something went wrong ❌");
+    }
+  });
